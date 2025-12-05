@@ -40,6 +40,23 @@ public class ProgramaEducativoService {
 
         return programaEducativoRepository.save(programa);
     }
+    // ==================================================
+    // MÉTODO HABILITAR — María Fernanda Rosas Briones
+    // ==================================================
+    @Transactional
+    public boolean habilitar(Integer id) {
+        Optional<ProgramaEducativoEntity> optional = programaEducativoRepository.findById(id);
+
+        if (!optional.isPresent()) {
+            return false;
+        }
+
+        ProgramaEducativoEntity programa = optional.get();
+        programa.setActivo(true);
+
+        programaEducativoRepository.save(programa);
+        return true;
+    }
 
     @Transactional(readOnly = true)
     public List<ProgramaDivisionDTO> findAll() {

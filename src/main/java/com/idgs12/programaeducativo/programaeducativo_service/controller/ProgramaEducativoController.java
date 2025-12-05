@@ -28,4 +28,18 @@ public class ProgramaEducativoController {
         List<ProgramaDivisionDTO> programas = service.findAll();
         return ResponseEntity.ok(programas);
     }
+    // ============================================
+    // HABILITAR — María Fernanda Rosas Briones
+    // ============================================
+    @PutMapping("/habilitar/{id}")
+    public ResponseEntity<?> habilitarPrograma(@PathVariable Integer id) {
+        boolean resultado = service.habilitar(id);
+
+        if (!resultado) {
+            return ResponseEntity.badRequest().body("No se encontró el programa educativo con ID: " + id);
+        }
+
+        return ResponseEntity.ok("Programa habilitado correctamente");
+    }
+
 }
